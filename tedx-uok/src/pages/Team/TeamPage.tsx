@@ -1,4 +1,5 @@
 import React from 'react';
+import { Linkedin } from 'lucide-react';
 import { sharedStyles } from '../../utils/constants';
 
 interface TeamMember {
@@ -7,8 +8,8 @@ interface TeamMember {
   role: string;
   type: 'Licensee' | 'EXCO' | 'Director';
   photo_url: string;
+  linkedin_url?: string;
   function_area?: string;
-  quote?: string;
 }
 
 interface TeamPageProps {
@@ -52,8 +53,20 @@ const TeamPage: React.FC<TeamPageProps> = ({ teamMembers }) => {
               />
             </div>
             <div className={`${sharedStyles.card.content} space-y-1`}>
-              <h3 className={sharedStyles.typography.cardTitle}>
-                {member.full_name}
+              <h3 className={`${sharedStyles.typography.cardTitle} flex items-center gap-2`}>
+                <span>{member.full_name}</span>
+                {member.linkedin_url && (
+                  <a
+                    href={member.linkedin_url}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    aria-label={`Open ${member.full_name} LinkedIn profile`}
+                    className="inline-flex items-center text-gray-300 hover:text-white transition-colors"
+                    title="LinkedIn"
+                  >
+                    <Linkedin className="h-4 w-4" aria-hidden="true" />
+                  </a>
+                )}
               </h3>
               <p className={sharedStyles.typography.cardSubtitle}>{member.role}</p>
               {member.function_area && (
@@ -69,23 +82,22 @@ const TeamPage: React.FC<TeamPageProps> = ({ teamMembers }) => {
   );
 
   return (
-    <main className={sharedStyles.layout.main}>
+    <main className="bg-black text-white min-h-screen">
       {/* Hero */}
       <section className={sharedStyles.layout.heroSection}>
-        <div className={sharedStyles.layout.heroContainer}>
-          <div className={sharedStyles.layout.heroGrid}>
-            <div>
-              <h1 className={`${sharedStyles.typography.heroTitle} mb-4`}>
-                <span className={sharedStyles.colors.tedxRed}>TEDx</span>
-                <span className={sharedStyles.colors.black}>UOK</span>
-              </h1>
-              <h2 className={`${sharedStyles.typography.heroTitle} ${sharedStyles.colors.black}`}>Team</h2>
-            </div>
-            <div className="flex items-center justify-start lg:justify-end">
-              <p className={`${sharedStyles.typography.description} max-w-md lg:text-right`}>
-                Meet the licensee, executive committee, and directors who shape TEDxUOK.
-              </p>
-            </div>
+        <div className={`${sharedStyles.layout.heroContainer} ${sharedStyles.layout.heroFlex}`}>
+          <div>
+            <h1 className={sharedStyles.typography.brandTitle}>
+              <span className={sharedStyles.colors.tedxRed}>TEDx</span>
+              <span className="text-white">UOK</span>
+            </h1>
+            <h2 className={`${sharedStyles.typography.heroTitle} text-white mt-5`}>Team</h2>
+          </div>
+
+          <div className={sharedStyles.layout.heroAside}>
+            <p className={sharedStyles.typography.heroDescriptionDark}>
+              Meet the licensee, executive committee, and directors who shape TEDxUOK.
+            </p>
           </div>
         </div>
       </section>
@@ -94,7 +106,7 @@ const TeamPage: React.FC<TeamPageProps> = ({ teamMembers }) => {
       
       {/* Team Sections */}
       <section className={sharedStyles.layout.contentSection}>
-        <div className="max-w-7xl mx-auto space-y-24">
+        <div className={sharedStyles.layout.pageStack}>
           {licensees.length > 0 && renderTeamSection('Licensee', licensees, 'TEAM 01')}
           {executiveCommittee.length > 0 && renderTeamSection('Executive Committee', executiveCommittee, 'TEAM 02')}
           {directors.length > 0 && renderTeamSection('Directors', directors, 'TEAM 03')}
