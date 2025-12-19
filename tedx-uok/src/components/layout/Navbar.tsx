@@ -1,4 +1,4 @@
-// components/Navbar.tsx
+// components/layout/Navbar.tsx
 import { Link, useLocation } from 'react-router-dom';
 import { useState } from 'react';
 
@@ -7,8 +7,15 @@ const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const isActive = (path: string) => {
-    return location.pathname === path;
+    return location.pathname === path || location.pathname.startsWith(path + '/');
   };
+
+  const navLinks = [
+    { path: '/', label: 'Home' },
+    { path: '/events', label: 'Events' },
+    { path: '/speakers', label: 'Speakers' },
+    { path: '/about', label: 'About' },
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-sm border-b border-gray-800">
@@ -23,46 +30,28 @@ const Navbar = () => {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            <Link 
-              to="/" 
-              className={`${isActive('/') ? 'text-[#EB0028] font-bold' : 'text-white hover:text-gray-300'} transition-colors`}
-            >
-              Home
-            </Link>
-            <Link 
-              to="/events" 
-              className={`${isActive('/events') ? 'text-[#EB0028] font-bold' : 'text-white hover:text-gray-300'} transition-colors`}
-            >
-              Events
-            </Link>
-            <Link 
-              to="/speakers" 
-              className={`${isActive('/speakers') ? 'text-[#EB0028] font-bold' : 'text-white hover:text-gray-300'} transition-colors`}
-            >
-              Speakers
-            </Link>
-            <Link 
-              to="/about" 
-              className={`${isActive('/about') || location.pathname.startsWith('/about/') 
-                ? 'text-[#EB0028] font-bold' 
-                : 'text-white hover:text-gray-300'} transition-colors`}
-            >
-              About
-            </Link>
-            <Link 
-              to="/contact" 
-              className={`${isActive('/contact') ? 'text-[#EB0028] font-bold' : 'text-white hover:text-gray-300'} transition-colors`}
-            >
-              Contact
-            </Link>
+          {/* Desktop Navigation - All White Text */}
+          <div className="hidden md:flex items-center space-x-6">
+            {navLinks.map((link) => (
+              <Link 
+                key={link.path}
+                to={link.path} 
+                className={`${
+                  isActive(link.path) 
+                    ? 'text-[#EB0028] font-bold' 
+                    : 'text-white hover:text-gray-300'
+                } transition-colors px-3 py-2`}
+              >
+                {link.label}
+              </Link>
+            ))}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Mobile menu button - White Icon */}
           <button
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             className="md:hidden text-white focus:outline-none"
+            aria-label="Toggle menu"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {isMenuOpen ? (
@@ -74,47 +63,24 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* Mobile Navigation - All White Text */}
         {isMenuOpen && (
           <div className="md:hidden bg-black border-t border-gray-800">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <Link 
-                to="/" 
-                className={`${isActive('/') ? 'text-[#EB0028] bg-gray-900' : 'text-white'} block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-900 transition-colors`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Home
-              </Link>
-              <Link 
-                to="/events" 
-                className={`${isActive('/events') ? 'text-[#EB0028] bg-gray-900' : 'text-white'} block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-900 transition-colors`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Events
-              </Link>
-              <Link 
-                to="/speakers" 
-                className={`${isActive('/speakers') ? 'text-[#EB0028] bg-gray-900' : 'text-white'} block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-900 transition-colors`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Speakers
-              </Link>
-              <Link 
-                to="/about" 
-                className={`${isActive('/about') || location.pathname.startsWith('/about/') 
-                  ? 'text-[#EB0028] bg-gray-900' 
-                  : 'text-white'} block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-900 transition-colors`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                About
-              </Link>
-              <Link 
-                to="/contact" 
-                className={`${isActive('/contact') ? 'text-[#EB0028] bg-gray-900' : 'text-white'} block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-900 transition-colors`}
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Contact
-              </Link>
+              {navLinks.map((link) => (
+                <Link 
+                  key={link.path}
+                  to={link.path} 
+                  className={`${
+                    isActive(link.path) 
+                      ? 'text-[#EB0028] bg-gray-900' 
+                      : 'text-white'
+                  } block px-3 py-2 rounded-md text-base font-medium hover:bg-gray-900 transition-colors`}
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {link.label}
+                </Link>
+              ))}
             </div>
           </div>
         )}
