@@ -5,6 +5,8 @@ import { HomePage } from './pages/Home/HomePage';
 import { Speakers } from './components/layout/Speakers';
 import { SpeakersListPage } from './pages/Speakers/SpeakersListPage';
 import { SpeakerDetailPage } from './pages/Speakers/SpeakerDetailPage';
+import { BlogListPage } from './pages/Blog/BlogListPage';
+import { BlogDetailPage } from './pages/Blog/BlogDetailPage';
 
 export default function App() {
   return (
@@ -21,6 +23,8 @@ export default function App() {
             } />
             <Route path="/speakers" element={<SpeakersListPage />} />
             <Route path="/speakers/:id" element={<SpeakerDetailPage />} />
+            <Route path="/blog" element={<BlogListPage />} />
+            <Route path="/blog/:slug" element={<BlogDetailPage />} />
             {/* Add other routes here */}
           </Routes>
         </main>

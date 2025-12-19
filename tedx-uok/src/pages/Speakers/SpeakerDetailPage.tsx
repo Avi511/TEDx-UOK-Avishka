@@ -1,10 +1,11 @@
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { motion } from 'motion/react';
 import { ArrowLeft, Linkedin, Twitter, Globe, Calendar, Clock, MapPin } from 'lucide-react';
 import { useSpeaker } from '../../hooks/useSpeakers';
 
 export function SpeakerDetailPage() {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
   const { speaker, loading, error } = useSpeaker(id!);
 
   if (loading) {
@@ -20,11 +21,12 @@ export function SpeakerDetailPage() {
       <div className="min-h-screen bg-black flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-white text-4xl mb-4" style={{ fontWeight: 700 }}>Speaker Not Found</h1>
-          <Link to="/speakers">
-            <button className="px-8 py-4 bg-[#EB0028] text-white rounded-full hover:bg-[#d00024] transition-all">
-              Back to Speakers
-            </button>
-          </Link>
+          <button 
+            onClick={() => navigate(-1)}
+            className="px-8 py-4 bg-[#EB0028] text-white rounded-full hover:bg-[#d00024] transition-all"
+          >
+            Back
+          </button>
         </div>
       </div>
     );
@@ -45,16 +47,19 @@ export function SpeakerDetailPage() {
           animate={{ opacity: 1, x: 0 }}
           className="mb-12"
         >
-          <Link to="/speakers">
-            <motion.button
+          <button 
+            onClick={() => navigate(-1)}
+            type="button"
+          >
+            <motion.div
               whileHover={{ x: -5 }}
               className="flex items-center gap-2 text-white/60 hover:text-white transition-colors group"
               style={{ fontWeight: 500 }}
             >
               <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
-              Back to Speakers
-            </motion.button>
-          </Link>
+              Back
+            </motion.div>
+          </button>
         </motion.div>
 
         <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">

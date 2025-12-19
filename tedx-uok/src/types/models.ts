@@ -16,3 +16,15 @@ export interface Speaker {
     website?: string;
   };
 }
+
+export interface BlogPost {
+  blog_id: string; // UUID
+  title: string;
+  slug: string; // unique
+  content: string; // text
+  cover_image_url?: string; // optional
+  category: string;
+  author_name: string;
+  published_at?: string; // timestamp (ISO string for frontend)
+  is_published: boolean;
+}

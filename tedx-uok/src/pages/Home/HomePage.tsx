@@ -15,7 +15,7 @@ export function HomePage() {
       <section className="relative min-h-screen flex items-center justify-center bg-[#0a0a0a] overflow-hidden pt-20">
         {/* Background Elements */}
         <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-[#EB0028] rounded-full blur-[200px] opacity-10"></div>
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-blue-600 rounded-full blur-[200px] opacity-5"></div>
+        <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-[#EB0028] rounded-full blur-[200px] opacity-5"></div>
 
         <div className="relative max-w-7xl mx-auto px-6 lg:px-12 text-center">
           {/* Badge */}
@@ -90,7 +90,7 @@ export function HomePage() {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.5 }}
             className="mt-20 grid grid-cols-3 gap-8 max-w-2xl mx-auto"
-          >
+            >
             <div>
               <div className="text-4xl font-bold text-[#EB0028] mb-2">50+</div>
               <p className="text-white/60 text-sm">Expert Speakers</p>
@@ -104,58 +104,6 @@ export function HomePage() {
               <p className="text-white/60 text-sm">Packed with Ideas</p>
             </div>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Featured Speakers Preview */}
-      <section className="relative py-32 bg-[#0a0a0a] overflow-hidden">
-        <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-[#EB0028] rounded-full blur-[200px] opacity-10"></div>
-
-        <div className="relative max-w-7xl xl:max-w-[1600px] 2xl:max-w-[1800px] mx-auto px-6 lg:px-12">
-          {/* Section Header */}
-          <div className="text-center mb-20">
-            <motion.span
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              className="inline-block px-4 py-2 bg-[#EB0028]/10 border border-[#EB0028]/20 rounded-full text-[#EB0028] mb-6"
-              style={{ fontWeight: 500, fontSize: '13px', letterSpacing: '0.1em', textTransform: 'uppercase' }}
-            >
-              Featured Speakers
-            </motion.span>
-
-            <motion.h2
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.1 }}
-              className="text-white mb-6"
-              style={{ fontWeight: 700, fontSize: 'clamp(36px, 5vw, 64px)', lineHeight: 1.1, letterSpacing: '-0.02em' }}
-            >
-              Meet Our <span className="text-[#EB0028]">Speakers</span>
-            </motion.h2>
-
-            <motion.p
-              initial={{ opacity: 0, y: 20 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ delay: 0.2 }}
-              className="text-white/60 max-w-2xl mx-auto text-lg"
-              style={{ fontWeight: 300 }}
-            >
-              Visionaries, innovators, and thought leaders who are shaping the future
-            </motion.p>
-          </div>
-
-          <div className="text-center">
-            <motion.button
-              initial={{ opacity: 0 }}
-              animate={isInView ? { opacity: 1 } : {}}
-              transition={{ delay: 0.5 }}
-              onClick={() => navigate('/speakers')}
-              className="px-8 py-4 bg-[#EB0028] text-white rounded-lg font-semibold hover:bg-[#d4001f] transition-colors inline-flex items-center gap-2"
-            >
-              View All Speakers
-              <ArrowRight className="w-5 h-5" />
-            </motion.button>
-          </div>
         </div>
       </section>
     </div>
