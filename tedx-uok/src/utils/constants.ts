@@ -2,29 +2,31 @@
 export const sharedStyles = {
 	// Card styles
 	card: {
-		base: 'group bg-white border border-gray-100 overflow-hidden',
-		imageContainer: 'aspect-[3/4] overflow-hidden bg-[#e8e2dc]',
+		base: 'group card-core overflow-hidden',
+		imageContainer: 'aspect-[3/4] overflow-hidden bg-[#0E0E0E]',
 		content: 'p-6',
 	},
 	// Typography
 	typography: {
 		brandTitle: 'text-6xl md:text-7xl lg:text-8xl font-bold leading-tight',
 		heroTitle: 'text-6xl md:text-7xl lg:text-8xl font-bold leading-tight',
-		heroDescriptionDark: 'text-lg md:text-xl text-gray-400 leading-relaxed',
 		sectionTitle: 'text-4xl md:text-5xl font-bold text-white',
-		cardTitle: 'font-bold text-black text-lg',
-		cardSubtitle: 'text-base text-gray-600',
-		cardAccent: 'text-base text-[#a68968]',
-		trackLabel: 'text-xs uppercase tracking-wider text-gray-400',
+		cardTitle: 'font-bold text-white text-lg',
+		cardSubtitle: 'text-base text-white/80',
+		cardAccent: 'text-base text-white/70',
+		trackLabel: 'text-xs uppercase text-white/60',
+		description: 'text-xl md:text-2xl text-white/80',
 	},
 	// Colors
 	colors: {
-		tedxRed: 'text-red-600',
-		bgCream: 'bg-[#f5f1ed]',
+		tedxRed: 'text-[#EB0028]',
+		black: 'text-black',
+		white: 'text-white',
 	},
 	// Layout
 	layout: {
-		heroSection: 'bg-black py-[60px] px-5',
+		main: 'min-h-screen bg-black',
+		heroSection: 'pt-20 pb-16 px-6',
 		heroContainer: 'max-w-7xl mx-auto',
 		heroFlex: 'flex flex-col md:flex-row justify-between items-start gap-8',
 		heroAside: 'max-w-md md:text-right md:ml-auto',

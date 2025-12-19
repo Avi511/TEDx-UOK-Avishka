@@ -83,22 +83,23 @@ const PartnersPage: React.FC<PartnersPageProps> = ({ partners }) => {
       {/* Hero */}
    
       <section className={sharedStyles.layout.heroSection}>
-              <div className={`${sharedStyles.layout.heroContainer} ${sharedStyles.layout.heroFlex}`}>
-                <div className="text-left">
-                  <h1 className={sharedStyles.typography.brandTitle}>
-                    <span className={sharedStyles.colors.tedxRed}>TEDx</span>
-                    <span className="text-white">UOK</span>
-                  </h1>
-                  <h2 className={`${sharedStyles.typography.heroTitle} text-white mt-5`}>Partners</h2>
-                </div>
-      
-                <div className={sharedStyles.layout.heroAside}>
-                  <p className={sharedStyles.typography.heroDescriptionDark}>
-                     Tiered showcases and equal spotlight for every collaborator.
-                  </p>
-                </div>
-              </div>
-            </section>
+        <div className={sharedStyles.layout.heroContainer}>
+          <div className={sharedStyles.layout.heroGrid}>
+            <div>
+              <h1 className={`${sharedStyles.typography.heroTitle} mb-4`}>
+                <span className={sharedStyles.colors.tedxRed}>TEDx</span>
+                <span className={sharedStyles.colors.black}>UOK</span>
+              </h1>
+              <h2 className={`${sharedStyles.typography.heroTitle} ${sharedStyles.colors.black}`}>Partners</h2>
+            </div>
+            <div className="flex items-center justify-start lg:justify-end">
+              <p className={`${sharedStyles.typography.description} max-w-md lg:text-right`}>
+                Tiered showcases and equal spotlight for every collaborator.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <div className={sharedStyles.layout.divider} />
 

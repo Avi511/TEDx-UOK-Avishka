@@ -101,9 +101,9 @@ const TeamPage: React.FC<TeamPageProps> = ({ teamMembers }) => {
           </div>
         </div>
       </section>
-      
+
       <div className={sharedStyles.layout.divider} />
-      
+
       {/* Team Sections */}
       <section className={sharedStyles.layout.contentSection}>
         <div className={sharedStyles.layout.pageStack}>
