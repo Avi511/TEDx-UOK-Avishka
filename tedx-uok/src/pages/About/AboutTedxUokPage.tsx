@@ -12,7 +12,7 @@ export default function AboutTedxUokPage() {
         <div className="text-center mb-16">
           <h1 className="text-6xl md:text-7xl font-bold mb-8">
             <span className="text-foreground">TED</span>
-            <span className="text-primary align-top text-[1.2em]">x</span>
+            <sup className="text-primary text-[0.8em]">x</sup>
             <span className="text-foreground ml-4">UOK</span>
           </h1>
           <p className="text-2xl text-muted-foreground max-w-4xl mx-auto">
@@ -30,12 +30,12 @@ export default function AboutTedxUokPage() {
           <h2 className="text-4xl font-bold text-foreground mb-8">Our Mission & Story</h2>
           <div className="bg-card border border-border rounded-lg p-8">
             <p className="text-xl text-muted-foreground mb-6">
-              TED<sup className="text-[1.2em]">x</sup>UOK was founded with a simple yet powerful vision: to create a platform
+              TED<sup className="text-[0.8em]">x</sup>UOK was founded with a simple yet powerful vision: to create a platform
               where innovative ideas from the University of Kelaniya community could be
               shared with the world.
             </p>
             <p className="text-lg text-muted-foreground">
-              As the first officially licensed TED<sup className="text-[1.2em]">x</sup> event at University of Kelaniya,
+              As the first officially licensed TED<sup className="text-[0.8em]">x</sup> event at University of Kelaniya,
               we're committed to fostering intellectual curiosity, interdisciplinary
               dialogue, and transformative thinking.
             </p>
@@ -44,7 +44,7 @@ export default function AboutTedxUokPage() {
 
         {/* Theme Intro */}
         <div className="mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-8">TED<sup className="text-[1.2em]">x</sup>UOK {eventYear}: {currentTheme}</h2>
+          <h2 className="text-4xl font-bold text-foreground mb-8">TED<sup className="text-[0.8em]">x</sup>UOK {eventYear}: {currentTheme}</h2>
           <div className="bg-card border border-border rounded-lg p-8">
             <h3 className="text-2xl font-bold text-foreground mb-4">What is the Ripple Effect?</h3>
             <p className="text-muted-foreground mb-4">

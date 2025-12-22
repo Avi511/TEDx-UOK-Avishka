@@ -9,6 +9,7 @@ import AboutTedxPage from "../pages/About/AboutTedxPage";
 import AboutTedxUokPage from "../pages/About/AboutTedxUokPage";
 import RegistrationPage from "../pages/Registration/RegistrationPage";
 import Agenda from "../pages/Agenda/AgendaPage";
+import PastEventsPage from "../pages/PastEvents/PastEventsPage";
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -24,7 +25,7 @@ function AnimatedRoutes() {
           </div>
         }
       />
-      
+
       {/* About Pages - EXACT විදියට */}
       <Route
         path="/about"
@@ -58,7 +59,7 @@ function AnimatedRoutes() {
           </div>
         }
       />
-      
+
       {/* Other Pages */}
       <Route
         path="/agenda"
@@ -73,6 +74,14 @@ function AnimatedRoutes() {
         element={
           <div key={location.pathname} className="page-transition">
             <RegistrationPage />
+          </div>
+        }
+      />
+      <Route
+        path="/past-events"
+        element={
+          <div key={location.pathname} className="page-transition">
+            <PastEventsPage />
           </div>
         }
       />
