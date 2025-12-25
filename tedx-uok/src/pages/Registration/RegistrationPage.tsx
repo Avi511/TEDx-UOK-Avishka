@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FormInput } from '../../components/forms/FormInput';
 import { FormSelect } from '../../components/forms/FormSelect';
 import { SubmitButton } from '../../components/forms/SubmitButton';
@@ -13,33 +13,47 @@ interface RegistrationFormData {
 }
 
 interface FormErrors {
-  full_name?: string;
+  full_name?:  string;
   email?: string;
   phone?: string;
   ticket_type?: string;
 }
 
-export const RegistrationPage: React.FC = () => {
+export const RegistrationPage: React.  FC = () => {
   const [formData, setFormData] = useState<RegistrationFormData>({
-    full_name: '',
+    full_name:  '',
     email: '',
     phone: '',
     ticket_type: '',
-    event_id: 'EVENT_001', // Hidden field - default event ID
+    event_id:  'EVENT_001', // Hidden field - default event ID
   });
 
   const [errors, setErrors] = useState<FormErrors>({});
   const [loading, setLoading] = useState(false);
   const [submitMessage, setSubmitMessage] = useState<{
-    type: 'success' | 'error';
+    type: "success" | "error";
     text: string;
   } | null>(null);
 
+  // Set body background to black when component mounts
+  useEffect(() => {
+    document.body.  style.backgroundColor = '#000000';
+    document.body.style.  margin = '0';
+    document.  body.style.padding = '0';
+    document.  documentElement.style.backgroundColor = '#000000';
+    
+    return () => {
+      // Cleanup when component unmounts
+      document.body.style.backgroundColor = '';
+      document.  documentElement.style.backgroundColor = '';
+    };
+  }, []);
+
   const ticketOptions = [
-    { value: 'general', label: 'General Admission - LKR 1,000' },
-    { value: 'vip', label: 'VIP - LKR 2,500' },
-    { value: 'student', label: 'Student - LKR 500' },
-    { value: 'early_bird', label: 'Early Bird - LKR 800' },
+    { value: "general", label: "General Admission - LKR 1,000" },
+    { value: "vip", label: "VIP - LKR 2,500" },
+    { value: "student", label: "Student - LKR 500" },
+    { value: "early_bird", label: "Early Bird - LKR 800" },
   ];
 
   const validateEmail = (email: string): boolean => {
@@ -56,33 +70,33 @@ export const RegistrationPage: React.FC = () => {
     const newErrors: FormErrors = {};
 
     // Validate full_name
-    if (!formData.full_name.trim()) {
-      newErrors.full_name = 'Full name is required';
-    } else if (formData.full_name.trim().length < 2) {
+    if (!formData.  full_name.trim()) {
+      newErrors. full_name = 'Full name is required';
+    } else if (formData.full_name. trim().length < 2) {
       newErrors.full_name = 'Name must be at least 2 characters';
     }
 
     // Validate email
     if (!formData.email.trim()) {
       newErrors.email = 'Email is required';
-    } else if (!validateEmail(formData.email)) {
+    } else if (!validateEmail(formData.  email)) {
       newErrors.email = 'Please enter a valid email address';
     }
 
     // Validate phone
-    if (!formData.phone.trim()) {
+    if (!  formData.phone.trim()) {
       newErrors.phone = 'Phone number is required';
-    } else if (!validatePhone(formData.phone)) {
+    } else if (!validatePhone(formData. phone)) {
       newErrors.phone = 'Please enter a valid phone number';
     }
 
     // Validate ticket_type
     if (!formData.ticket_type) {
-      newErrors.ticket_type = 'Please select a ticket type';
+      newErrors.ticket_type = "Please select a ticket type";
     }
 
     setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    return Object. keys(newErrors).length === 0;
   };
 
   const handleChange = (name: string, value: string) => {
@@ -100,14 +114,14 @@ export const RegistrationPage: React.FC = () => {
     }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e:   React.FormEvent) => {
     e.preventDefault();
     setSubmitMessage(null);
 
     if (!validateForm()) {
       setSubmitMessage({
-        type: 'error',
-        text: 'Please fix the errors above before submitting',
+        type: "error",
+        text: "Please fix the errors above before submitting",
       });
       return;
     }
@@ -119,26 +133,26 @@ export const RegistrationPage: React.FC = () => {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       // Log the form data (in production, this would be sent to backend)
-      console.log('Registration Data:', formData);
+      console.log("Registration Data:", formData);
 
       setSubmitMessage({
-        type: 'success',
-        text: 'Registration successful! Check your email for confirmation.',
+        type:  'success',
+        text:  'Registration successful! Check your email for confirmation.',
       });
 
       // Reset form after successful submission
       setFormData({
         full_name: '',
         email: '',
-        phone: '',
-        ticket_type: '',
+        phone:   '',
+        ticket_type:  '',
         event_id: 'EVENT_001',
       });
       setErrors({});
     } catch (error) {
       setSubmitMessage({
-        type: 'error',
-        text: 'Something went wrong. Please try again.',
+        type: "error",
+        text: "Something went wrong. Please try again.",
       });
     } finally {
       setLoading(false);
@@ -146,91 +160,117 @@ export const RegistrationPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-3xl mx-auto w-full">
-        <div className="text-center mb-12">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white mb-4">
-            Event <span className="text-[#EB0028]">Registration</span>
-          </h1>
-          <p className="text-gray-400 text-lg">
-            Secure your spot at TEDx University of Kelaniya
-          </p>
-        </div>
+    <>
+      <style>{`
+        body, html, #root {
+          background-color: #000000 !important;
+          margin: 0 !important;
+          padding: 0 !  important;
+        }
+        * {
+          letter-spacing: 0 !important;
+        }
+      `}</style>
 
-        <div className="bg-[#0E0E0E] border border-[#1F1F1F] rounded-xl sm:rounded-2xl p-6 sm:p-8">
-          {submitMessage && (
-            <div className="mb-6">
-              <FormMessage
-                type={submitMessage.type}
-                message={submitMessage.text}
-                onClose={() => setSubmitMessage(null)}
-              />
+      <div
+        style={{
+          backgroundColor: '#000000',
+          minHeight: '100vh',
+          width: '100%',
+          position: 'absolute',
+          top: 0,
+          left:   0,
+          right: 0,
+          bottom:   0,
+        }}
+      >
+        <div className="min-h-screen bg-black py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg: px-8">
+          <div className="max-w-3xl mx-auto w-full">
+            <div className="text-center mb-12">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4" style={{ color: '#FFFFFF', letterSpacing: '0' }}>
+                Event <span style={{ color: '#EB0028' }}>Registration</span>
+              </h1>
+              <p className="text-lg" style={{ color: '#FFFFFF', letterSpacing: '0' }}>
+                Secure your spot at <span style={{ color: '#EB0028' }}>TED<sup style={{ color: '#EB0028' }}>x</sup></span> <span style={{ color: '#FFFFFF' }}>UoK</span>
+              </p>
             </div>
-          )}
 
-          <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Hidden event_id field */}
-            <input type="hidden" name="event_id" value={formData.event_id} />
+            <div className="bg-[#0E0E0E] border border-[#1F1F1F] rounded-xl sm:rounded-2xl p-6 sm:p-8">
+              {submitMessage && (
+                <div className="mb-6">
+                  <FormMessage
+                    type={submitMessage.type}
+                    message={submitMessage.text}
+                    onClose={() => setSubmitMessage(null)}
+                  />
+                </div>
+              )}
 
-            <FormInput
-              label="Full Name"
-              name="full_name"
-              type="text"
-              value={formData.full_name}
-              onChange={handleChange}
-              placeholder="Enter your full name"
-              error={errors.full_name}
-              required
-            />
+              <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Hidden event_id field */}
+                <input type="hidden" name="event_id" value={formData.event_id} />
 
-            <FormInput
-              label="Email Address"
-              name="email"
-              type="email"
-              value={formData.email}
-              onChange={handleChange}
-              placeholder="your.email@example.com"
-              error={errors.email}
-              required
-            />
+                <FormInput
+                  label="Full Name"
+                  name="full_name"
+                  type="text"
+                  value={formData.full_name}
+                  onChange={handleChange}
+                  placeholder="Enter your full name"
+                  error={errors.full_name}
+                  required
+                />
 
-            <FormInput
-              label="Phone Number"
-              name="phone"
-              type="tel"
-              value={formData.phone}
-              onChange={handleChange}
-              placeholder="+94 XX XXX XXXX"
-              error={errors.phone}
-              required
-            />
+                <FormInput
+                  label="Email Address"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder="your.  email@example.com"
+                  error={errors.email}
+                  required
+                />
 
-            <FormSelect
-              label="Ticket Type"
-              name="ticket_type"
-              value={formData.ticket_type}
-              onChange={handleChange}
-              options={ticketOptions}
-              placeholder="Select your ticket type"
-              error={errors.ticket_type}
-              required
-            />
+                <FormInput
+                  label="Phone Number"
+                  name="phone"
+                  type="tel"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  placeholder="+94 XX XXX XXXX"
+                  error={errors.phone}
+                  required
+                />
 
-            <div className="pt-4">
-              <SubmitButton loading={loading}>
-                Complete Registration
-              </SubmitButton>
+                <FormSelect
+                  label="Ticket Type"
+                  name="ticket_type"
+                  value={formData.ticket_type}
+                  onChange={handleChange}
+                  options={ticketOptions}
+                  placeholder="Select your ticket type"
+                  error={errors.ticket_type}
+                  required
+                />
+
+                <div className="pt-4">
+                  <SubmitButton loading={loading}>
+                    Complete Registration
+                  </SubmitButton>
+                </div>
+              </form>
+
+              <div className="mt-6 text-center">
+                <p className="text-gray-500 text-sm" style={{ letterSpacing: '0' }}>
+                  By registering, you agree to our terms and conditions
+                </p>
+              </div>
             </div>
-          </form>
-
-          <div className="mt-6 text-center">
-            <p className="text-gray-500 text-sm">
-              By registering, you agree to our terms and conditions
-            </p>
           </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
