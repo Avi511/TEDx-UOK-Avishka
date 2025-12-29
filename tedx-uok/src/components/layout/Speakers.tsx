@@ -17,7 +17,7 @@ export function Speakers() {
         speaker.full_name.toLowerCase().includes(query) ||
         speaker.title.toLowerCase().includes(query) ||
         speaker.talk_title.toLowerCase().includes(query) ||
-        speaker.expertise.some(tag => tag.toLowerCase().includes(query))
+        (speaker.expertise || []).some(tag => tag.toLowerCase().includes(query))
       );
     });
   }, [speakers, searchQuery]);
@@ -101,14 +101,14 @@ export function Speakers() {
           <AnimatePresence mode='popLayout'>
             {displayedSpeakers.map((speaker, index) => (
               <motion.div
-                key={speaker.id}
+                key={speaker.speaker_id}
                 layout
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9 }}
                 transition={{ duration: 0.3, delay: index * 0.05 }}
               >
-                <Link to={`/speakers/${speaker.id}`}>
+                <Link to={`/speakers/${speaker.speaker_id}`}>
                   <motion.div
                     whileHover={{ y: -10 }}
                     className="group relative bg-[#111111] border border-white/10 rounded-3xl overflow-hidden hover:border-[#EB0028]/50 transition-all h-full"
@@ -118,6 +118,11 @@ export function Speakers() {
                       <img
                         src={speaker.photo_url}
                         alt={speaker.full_name}
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.onerror = null;
+                          target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.full_name)}&background=111&color=fff&size=512`;
+                        }}
                         className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
@@ -145,7 +150,7 @@ export function Speakers() {
 
                       {/* Expertise Tags */}
                       <div className="flex flex-wrap gap-2 pt-2">
-                        {speaker.expertise.slice(0, 2).map((tag, i) => (
+                        {(speaker.expertise || []).slice(0, 2).map((tag, i) => (
                           <span
                             key={i}
                             className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-white/50 text-[10px]"

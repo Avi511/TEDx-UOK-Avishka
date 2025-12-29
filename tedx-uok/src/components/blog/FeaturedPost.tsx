@@ -51,7 +51,7 @@ export function FeaturedPost({ post }: FeaturedPostProps) {
       <div className="flex flex-col justify-center space-y-6">
         <div className="flex items-center gap-4">
             <span className="text-[#EB0028] font-bold tracking-widest uppercase text-xs">
-                {post.category || 'Featured'}
+                FEATURED
             </span>
             <div className="h-px w-8 bg-white/20"></div>
         </div>

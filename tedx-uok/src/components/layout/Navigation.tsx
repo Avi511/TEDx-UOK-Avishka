@@ -15,13 +15,12 @@ export function Navigation() {
   }, []);
 
   const menuItems = [
-    { label: 'Home', href: '/#home', isRoute: false },
-    { label: 'About', href: '/#about', isRoute: false },
-    { label: 'Speakers', href: '/#speakers', isRoute: false },
-    { label: 'Agenda', href: '/#agenda', isRoute: false },
+    { label: 'Home', href: '/', isRoute: true },
+    { label: 'Speakers', href: '/speakers', isRoute: true },
+    { label: 'Agenda', href: '/agenda', isRoute: true },
     { label: 'Blog', href: '/blog', isRoute: true },
-    { label: 'Team', href: '/#team', isRoute: false },
-    { label: 'Partners', href: '/#partners', isRoute: false },
+    { label: 'Contact', href: '/contact', isRoute: true },
+    { label: 'Register', href: '/registration', isRoute: true },
   ];
 
   return (
@@ -33,7 +32,7 @@ export function Navigation() {
       <div className="max-w-7xl xl:max-w-[1600px] 2xl:max-w-[1800px] mx-auto px-6 lg:px-12">
         <div className="flex items-center justify-between h-16">
           <Link to="/" className="text-2xl font-bold text-white hover:text-[#EB0028] transition-colors cursor-pointer">
-            TEDx UOK
+            TEDxUOK
           </Link>
 
           <div className="hidden lg:flex items-center space-x-8">

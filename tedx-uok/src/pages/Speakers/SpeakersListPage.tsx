@@ -91,13 +91,13 @@ export function SpeakersListPage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {speakers.map((speaker, index) => (
             <motion.div
-              key={speaker.id}
+              key={speaker.speaker_id}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: '-100px' }}
               transition={{ delay: 0.1 + index * 0.1 }}
             >
-              <Link to={`/speakers/${speaker.id}`}>
+              <Link to={`/speakers/${speaker.speaker_id}`}>
                 <motion.div
                   whileHover={{ y: -10 }}
                   className="group relative bg-[#111111] border border-white/10 rounded-3xl overflow-hidden hover:border-[#EB0028]/50 transition-all h-full"
@@ -107,6 +107,11 @@ export function SpeakersListPage() {
                     <img
                       src={speaker.photo_url}
                       alt={speaker.full_name}
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.onerror = null;
+                        target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.full_name)}&background=111&color=fff&size=512`;
+                      }}
                       className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity"></div>
@@ -131,19 +136,10 @@ export function SpeakersListPage() {
                     <p className="text-white/60 line-clamp-2" style={{ fontWeight: 300, fontSize: '15px', lineHeight: 1.6 }}>
                       {speaker.talk_title}
                     </p>
-
-                    {/* Expertise Tags */}
-                    <div className="flex flex-wrap gap-2 pt-2">
-                      {speaker.expertise.slice(0, 2).map((tag, i) => (
-                        <span
-                          key={i}
-                          className="px-3 py-1 bg-white/5 border border-white/10 rounded-full text-white/50 text-xs"
-                          style={{ fontWeight: 400 }}
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
+                    
+                    {speaker.organization && (
+                      <p className="text-white/40 text-sm">{speaker.organization}</p>
+                    )}
                   </div>
 
                   {/* Glow Effect on Hover */}

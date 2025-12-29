@@ -75,6 +75,11 @@ export function SpeakerDetailPage() {
                 <img
                   src={speaker.photo_url}
                   alt={speaker.full_name}
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(speaker.full_name)}&background=111&color=fff&size=512`;
+                  }}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent"></div>
@@ -141,23 +146,19 @@ export function SpeakerDetailPage() {
               </p>
             </motion.div>
 
-            {/* Expertise Tags */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex flex-wrap gap-3"
-            >
-              {speaker.expertise.map((tag, index) => (
-                <span
-                  key={index}
-                  className="px-5 py-2.5 bg-white/5 border border-white/10 rounded-full text-white/70 hover:bg-white/10 hover:border-[#EB0028]/30 transition-all"
-                  style={{ fontWeight: 500, fontSize: '14px' }}
-                >
-                  {tag}
+            {/* Organization */}
+            {speaker.organization && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+                className="inline-block px-5 py-2.5 bg-white/5 border border-white/10 rounded-full"
+              >
+                <span className="text-white/70" style={{ fontWeight: 500, fontSize: '14px' }}>
+                  {speaker.organization}
                 </span>
-              ))}
-            </motion.div>
+              </motion.div>
+            )}
 
             {/* Bio */}
             <motion.div

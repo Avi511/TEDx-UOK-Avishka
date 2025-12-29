@@ -1,38 +1,38 @@
 import { useState, useEffect } from 'react';
-import type { AgendaItem } from '../types/models';
+import type { Partner } from '../types/models';
 import { supabase } from '../lib/supabaseClient';
 
-export function useAgenda() {
-    const [items, setItems] = useState<AgendaItem[]>([]);
+export function usePartners() {
+    const [partners, setPartners] = useState<Partner[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     useEffect(() => {
-        async function fetchAgenda() {
+        async function fetchPartners() {
             try {
                 setLoading(true);
                 const { data, error } = await supabase
-                    .from('agenda_items')
+                    .from('partners')
                     .select('*')
-                    .order('start_time', { ascending: true });
+                    .order('name', { ascending: true });
 
                 if (error) {
                     throw error;
                 }
 
                 if (data) {
-                    setItems(data as AgendaItem[]);
+                    setPartners(data as Partner[]);
                 }
             } catch (err) {
-                console.error('Error fetching agenda items:', err);
-                setError(err instanceof Error ? err.message : 'Failed to fetch agenda');
+                console.error('Error fetching partners:', err);
+                setError(err instanceof Error ? err.message : 'Failed to fetch partners');
             } finally {
                 setLoading(false);
             }
         }
 
-        fetchAgenda();
+        fetchPartners();
     }, []);
 
-    return { items, loading, error };
+    return { partners, loading, error };
 }
