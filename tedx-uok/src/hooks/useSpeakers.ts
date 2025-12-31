@@ -8,6 +8,14 @@ export interface Speaker {
   talk_title: string;
   photo_url: string;
   bio_short?: string;
+  bio_long?: string;
+  organization?: string;
+  talk_description?: string;
+  social_links?: {
+    linkedin?: string;
+    twitter?: string;
+    website?: string;
+  };
 }
 
 export const useSpeakers = (limit?: number) => {
@@ -39,4 +47,39 @@ export const useSpeakers = (limit?: number) => {
   }, [limit]);
 
   return { speakers, loading };
+};
+
+export const useSpeaker = (id: string) => {
+  const [speaker, setSpeaker] = useState<Speaker | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchSpeaker = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const { data, error } = await supabase
+          .from("speakers")
+          .select("*")
+          .eq("id", id)
+          .single();
+
+        if (error) throw error;
+        setSpeaker(data);
+      } catch (err: any) {
+        console.error("Error fetching speaker:", err.message);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchSpeaker();
+    }
+  }, [id]);
+
+  return { speaker, loading, error };
 };
